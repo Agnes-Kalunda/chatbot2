@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+     "chatterbot.ext.django_chatterbot",
     'adminApp',
     'tailwind',
     'theme',
@@ -93,6 +94,15 @@ CHANNEL_LAYERS = {
     },
 }
 
+
+
+# Chatterbot
+CHATTERBOT = {
+    "name": "User Support Bot",
+    "logic_adapters": [
+        "chatterbot.logic.BestMatch",
+    ],
+} 
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
