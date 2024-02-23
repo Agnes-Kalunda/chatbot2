@@ -11,6 +11,8 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
 from pathlib import Path
+from decouple import config
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -25,7 +27,7 @@ SECRET_KEY = 'django-insecure-2(wqg%m_u)97h4tn+cfn0_6v@lddn!1t-%k8qfdfy2$j5k^(h2
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*"]
 
 
 # Application definition
@@ -80,7 +82,7 @@ TEMPLATES = [
         },
     },
 ]
-ASGI_APPLICATION = "config.asgi.application"
+ASGI_APPLICATION = "admin.asgi.application"
 WSGI_APPLICATION = 'admin.wsgi.application'
 
 
@@ -89,7 +91,7 @@ CHANNEL_LAYERS = {
     "default": {
         "BACKEND": "channels_redis.core.RedisChannelLayer",
         "CONFIG": {
-            "hosts": [config("REDIS_BACKEND")],
+            "hosts": [config("REDIS_BACKEND", default="localhost")],
         },
     },
 }
@@ -108,8 +110,14 @@ CHATTERBOT = {
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'chatbot',
+        'USER': 'agnes',
+        'PASSWORD': 'password',
+        'HOST': 'localhost',
+        'PORT': '5432',
+        
+
     }
 }
 
