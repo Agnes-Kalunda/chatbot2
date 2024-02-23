@@ -85,13 +85,18 @@ TEMPLATES = [
 ASGI_APPLICATION = "admin.asgi.application"
 WSGI_APPLICATION = 'admin.wsgi.application'
 
+# Celery
+CELERY_BROKER_URL="redis://redis:6379/0"
+
+# Redis
+REDIS_BACKEND="redis://redis:6379/0"
 
 # Django Channels
 CHANNEL_LAYERS = {
     "default": {
         "BACKEND": "channels_redis.core.RedisChannelLayer",
         "CONFIG": {
-            "hosts": [config("REDIS_BACKEND", default="localhost")],
+            "hosts": ["redis://redis:6379/0"],
         },
     },
 }
